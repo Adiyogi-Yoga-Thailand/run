@@ -16,9 +16,10 @@ export function checkHttpMethod(event: HandlerEvent, httpMethod: string): [boole
 
 export async function handleRequest(
   event: HandlerEvent,
-  callback: () => Promise<HandlerResponse>
+  callback: () => Promise<HandlerResponse>,
+  httpMethod: string = "POST"
 ): Promise<HandlerResponse> {
-  const [pass, error] = checkHttpMethod(event, "POST")
+  const [pass, error] = checkHttpMethod(event, httpMethod)
   if (!pass) return error
   try {
     return await callback()
