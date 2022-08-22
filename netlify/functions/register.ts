@@ -3,11 +3,13 @@ import fetch from "node-fetch"
 
 import { handleRequest } from "./lib/utils"
 
+const { API_BASE_URL, TOKEN } = process.env
+
 export const handler: Handler = async (event, context) =>
   handleRequest(event, async () => {
-    const response = await fetch(`${process.env.API_BASE_URL}/api/customers`, {
+    const response = await fetch(`${API_BASE_URL}/api/customers`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.TOKEN}` },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${TOKEN}` },
       body: event.body,
     })
     const json: any = await response.json()
